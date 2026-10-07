@@ -404,6 +404,7 @@ def header():
           Book a call
           <span class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink transition group-hover:rotate-45" aria-hidden="true">{ARROW.format(s=14)}</span>
         </a>
+        <a href="{BOOKING_URL}" target="_blank" rel="noopener" class="inline-flex h-11 items-center rounded-full bg-ink px-4 text-sm font-medium text-white transition hover:bg-brand sm:hidden">Book a call</a>
         <button type="button" class="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white lg:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" data-menu-btn>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
@@ -421,7 +422,7 @@ def header():
 def footer():
     home = "../index.html"
     links = [("Work", "#work"), ("About", "#about"), ("Services", "#services"), ("Process", "#process"), ("Team", "#team"), ("FAQs", "#faq"), ("Contact", "#contact")]
-    items = "\n".join(f'          <li><a href="{home}{h}" class="hover:text-ink">{t}</a></li>' for t, h in links)
+    items = "\n".join(f'          <li><a href="{home}{h}" class="inline-block py-3 hover:text-ink">{t}</a></li>' for t, h in links)
     return f'''  <footer class="border-t border-line">
     <div class="mx-auto flex max-w-site flex-col gap-8 px-4 py-12 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
       <div>
@@ -431,7 +432,7 @@ def footer():
         <p class="mt-3 max-w-xs text-[15px] text-muted">The AI growth and marketing partner for fast-moving B2B companies.</p>
       </div>
       <nav aria-label="Footer">
-        <ul class="flex flex-wrap gap-x-6 gap-y-2 text-[15px] text-muted">
+        <ul class="-my-3 flex flex-wrap gap-x-6 text-[15px] text-muted">
 {items}
         </ul>
       </nav>
@@ -486,7 +487,7 @@ def pillars_section(svc):
           </li>''' for i, (t, sub, d) in enumerate(svc["pillars"], 1))
     return f'''
     <!-- ============ SYSTEM ============ -->
-    <section class="py-24 sm:py-28">
+    <section class="py-16 sm:py-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl">
           <h2 class="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">The {len(svc["pillars"])}-part system {serif}behind it</span></h2>
@@ -545,7 +546,7 @@ def case_detail_section(svc):
             </figure>'''
     return f'''
     <!-- ============ CASE STUDY ============ -->
-    <section id="case-study" class="py-24 sm:py-28">
+    <section id="case-study" class="py-16 sm:py-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Case {serif}study</span></h2>
         <div class="mt-12 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
@@ -598,7 +599,7 @@ def offers_section(svc):
     cards = "\n".join(card(o) for o in offers)
     return f'''
     <!-- ============ OFFERS ============ -->
-    <section id="pricing" class="py-24 sm:py-28">
+    <section id="pricing" class="py-16 sm:py-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl">
           <h2 class="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Two ways to {serif}work with us</span></h2>
@@ -685,7 +686,7 @@ def case_list_section(svc):
     rows = "\n".join(row(i, c) for i, c in enumerate(cases))
     return f'''
     <!-- ============ CASE STUDIES ============ -->
-    <section id="case-studies" class="py-24 sm:py-28">
+    <section id="case-studies" class="py-16 sm:py-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl">
           <h2 class="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Brands we've {serif}grown</span></h2>
@@ -727,7 +728,7 @@ def portfolio_section(svc):
     cards = "\n".join(card(it) for it in items)
     return f'''
     <!-- ============ PORTFOLIO ============ -->
-    <section id="portfolio" class="py-24 sm:py-28">
+    <section id="portfolio" class="py-16 sm:py-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl">
           <h2 class="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Websites we've {serif}built</span></h2>
@@ -758,7 +759,7 @@ def advisors_section(svc):
           </li>''' for img, name, role, focus in people)
     return f'''
     <!-- ============ ADVISORS ============ -->
-    <section id="advisors" class="py-24 sm:py-28">
+    <section id="advisors" class="py-16 sm:py-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl">
           <h2 class="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Advisors you'll {serif}work with</span></h2>
@@ -808,7 +809,7 @@ def page(svc):
     results_heading = f"Results we've {serif}delivered</span>" if svc["case"] else f"What our {serif}clients say</span>"
     results_bg = "bg-surface" if svc.get("case_detail") else ""
     results_section = f'''    <!-- ============ RESULTS ============ -->
-    <section class="{results_bg} py-24 sm:py-28">
+    <section class="{results_bg} py-16 sm:py-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <h2 class="max-w-2xl text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">{results_heading}</h2>
         <div class="mt-12 space-y-6">
@@ -880,7 +881,7 @@ def page(svc):
     <section class="relative -mt-[76px] overflow-hidden pt-[76px]">
       <div class="glow left-[-10%] top-[10%] h-[480px] w-[480px] bg-brand/20" aria-hidden="true"></div>
       <div class="glow right-[-8%] top-[20%] h-[480px] w-[480px] bg-sky/20" aria-hidden="true"></div>
-      <div class="relative mx-auto grid max-w-site gap-12 px-4 pb-20 pt-14 sm:px-6 sm:pt-20 lg:grid-cols-[1.35fr_1fr] lg:items-end lg:px-8">
+      <div class="relative mx-auto grid max-w-site gap-10 px-4 pb-14 pt-10 sm:gap-12 sm:px-6 sm:pb-20 sm:pt-20 lg:grid-cols-[1.35fr_1fr] lg:items-end lg:px-8">
         <div>
           <nav aria-label="Breadcrumb" class="text-sm text-muted">
             <ol class="flex flex-wrap items-center gap-2">
@@ -913,7 +914,7 @@ def page(svc):
 
 {glance_section(svc)}{pillars_section(svc)}
     <!-- ============ INCLUDED ============ -->
-    <section id="included" class="bg-surface py-24 sm:py-28">
+    <section id="included" class="bg-surface py-16 sm:py-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <h2 class="max-w-2xl text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">What's <span class="font-serif font-normal italic">included</span></h2>
         <ul class="mt-12 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
@@ -938,7 +939,7 @@ def page(svc):
 {results_section}
 {offers_section(svc)}
     <!-- ============ FAQ ============ -->
-    <section class="bg-surface py-24 sm:py-28">
+    <section class="bg-surface py-16 sm:py-28">
       <div class="mx-auto grid max-w-site gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.4fr] lg:gap-20 lg:px-8">
         <h2 class="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Common <span class="font-serif font-normal italic">questions</span></h2>
         <div class="divide-y divide-line border-y border-line">
@@ -948,7 +949,7 @@ def page(svc):
     </section>
 
     <!-- ============ CONTACT ============ -->
-    <section id="contact" class="py-24 sm:py-28">
+    <section id="contact" class="py-16 sm:py-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-brand via-brand-dark to-sky-dark px-6 py-20 text-center text-white sm:px-12 sm:py-24">
           <div class="glow -left-20 -top-20 h-[360px] w-[360px] bg-sky/50" aria-hidden="true"></div>
@@ -969,7 +970,7 @@ def page(svc):
     </section>
 
     <!-- ============ OTHER SERVICES ============ -->
-    <section class="pb-24 sm:pb-28">
+    <section class="pb-16 sm:pb-28">
       <div class="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">Explore other <span class="font-serif font-normal italic">services</span></h2>
         <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

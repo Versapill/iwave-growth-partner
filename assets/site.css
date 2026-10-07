@@ -25,7 +25,9 @@ h1, h2, h3 { text-wrap: balance; }
 @keyframes t-scroll { to { transform: translateY(-33.3333%); } }
 
 /* Team gallery: on desktop hover/focus, the active photo expands and the others narrow and blur */
-.team-card { aspect-ratio: 4 / 3; outline: none; }
+.team-card { flex: 0 0 78%; aspect-ratio: 4 / 5; scroll-snap-align: center; outline: none; }
+.team-gallery { scrollbar-width: none; }
+.team-gallery::-webkit-scrollbar { display: none; }
 .team-card:focus-visible { box-shadow: 0 0 0 3px #fff, 0 0 0 5px #554DF1; }
 .team-img { object-position: center bottom; transition: filter .5s ease, transform .6s ease; }
 @media (min-width: 768px) {
