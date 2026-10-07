@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Tooling
+node_modules/
+.claude/
+
+# Raw source material (originals, screen recordings). The site only uses the optimised files in /assets.
+Pictures/
