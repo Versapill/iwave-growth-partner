@@ -821,7 +821,7 @@ def page(svc):
       </div>
     </section>
 ''' if (svc["case"] or svc["quotes"]) else ""
-    faq = "\n".join(f'''          <details class="group py-2"{" open" if i == 0 else ""}>
+    faq = "\n".join(f'''          <details class="group py-2">
             <summary class="flex min-h-[56px] cursor-pointer items-center justify-between gap-6 py-3 text-lg font-semibold">
               {e(q)}
               <span class="faq-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-surface transition" aria-hidden="true">{PLUS}</span>

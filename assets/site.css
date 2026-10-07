@@ -7,11 +7,12 @@ h1, h2, h3 { text-wrap: balance; }
 .glow { position: absolute; border-radius: 9999px; filter: blur(90px); pointer-events: none; }
 
 /* Logo marquee */
-.marquee { mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
+.marquee { -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
 .marquee-track { display: flex; width: max-content; animation: scroll 26s linear infinite; }
-.marquee[data-paused="true"] .marquee-track,
-.marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track { animation-play-state: paused; }
+/* Pause on hover only for real pointers: iOS treats a touch as a "sticky" hover, which froze the strip on phones */
+@media (hover: hover) and (pointer: fine) {
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+}
 @keyframes scroll { to { transform: translateX(-50%); } }
 
 /* Hero entrance: one orchestrated moment on load */
@@ -20,7 +21,7 @@ h1, h2, h3 { text-wrap: balance; }
 @keyframes rise { to { opacity: 1; transform: none; } }
 
 /* Testimonial columns: each track holds 3 copies of its cards and moves up by one copy for a seamless loop */
-.t-columns { mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent); }
+.t-columns { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent); }
 .t-track { display: flex; flex-direction: column; animation: t-scroll var(--t-duration, 25s) linear infinite; }
 @keyframes t-scroll { to { transform: translateY(-33.3333%); } }
 
@@ -89,6 +90,12 @@ h1, h2, h3 { text-wrap: balance; }
 @keyframes ab-draw { from { stroke-dashoffset: 20; } to { stroke-dashoffset: 0; } }
 @keyframes ab-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(.7); } }
 @keyframes ab-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+
+/* Swipe rows (phones/tablets): case studies and testimonials scroll sideways like the team row */
+.swipe-row { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.swipe-row::-webkit-scrollbar { display: none; }
+.swipe-row > * { flex: 0 0 84%; scroll-snap-align: center; }
+@media (min-width: 640px) { .swipe-row > * { flex-basis: 60%; } }
 
 /* FAQ accordion */
 details > summary { list-style: none; }

@@ -196,7 +196,7 @@
           <a href="https://cal.com/iwave-digital/discovery-call" target="_blank" rel="noopener" class="inline-flex h-11 items-center gap-2 self-start rounded-full border border-line px-5 text-[15px] font-medium transition hover:border-ink md:self-auto">Start your project</a>
         </div>
 
-        <div class="mt-14 grid gap-6 lg:grid-cols-3">
+        <div class="swipe-row -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:mt-14 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
           <a href="services/linkedin-client-acquisition.html#case-study" class="group flex flex-col overflow-hidden rounded-3xl border border-line bg-white transition hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_rgba(85,77,241,.45)]">
             <div class="relative flex aspect-[16/9] flex-col justify-end overflow-hidden sm:aspect-[4/3] bg-brand p-7 text-white">
               <div class="absolute -right-16 -top-16 bg-sky/60 h-56 w-56 rounded-full blur-2xl" aria-hidden="true"></div>
@@ -598,7 +598,7 @@
         </div>
 
         <div class="divide-y divide-line border-y border-line">
-          <details class="group py-2" open>
+          <details class="group py-2">
             <summary class="flex min-h-[56px] cursor-pointer items-center justify-between gap-6 py-3 text-lg font-semibold">
               Who do you work with?
               <span class="faq-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-surface transition" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
@@ -748,15 +748,22 @@
         tCols.appendChild(col);
       });
     };
-    if (reduce) {
-      // Still grid instead of motion
-      tList.className = 'mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3';
-    } else {
-      tCols.classList.remove('hidden');
-      tCols.classList.add('flex');
-      buildColumns();
-      window.addEventListener('resize', buildColumns);
-    }
+    // Phones get a swipeable row; tablets and desktops get the moving columns (or a still grid with reduced motion)
+    const tLayout = () => {
+      if (window.innerWidth < 768) {
+        tList.className = 'swipe-row -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6';
+        tCols.classList.add('hidden'); tCols.classList.remove('flex');
+      } else if (reduce) {
+        tList.className = 'mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3';
+        tCols.classList.add('hidden'); tCols.classList.remove('flex');
+      } else {
+        tList.className = 'sr-only';
+        tCols.classList.remove('hidden'); tCols.classList.add('flex');
+        buildColumns();
+      }
+    };
+    tLayout();
+    window.addEventListener('resize', tLayout);
 
     // Services list: hover/focus highlights a row and moves the illustration card next to it.
     // On touch screens the first tap opens a row (showing its illustration), the second follows the link.
